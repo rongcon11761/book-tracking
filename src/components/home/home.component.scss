@@ -1,0 +1,25 @@
+.home-container {
+  position: relative;
+  .search-button {
+    width: 80px;
+    height: 80px;
+    padding: 20px;
+    background-image: url(../../icons/search.svg);
+    background-repeat: no-repeat;
+    background-position: 20px 22px;
+    background-size: 40px;
+    font-size: 40px;
+    border: 1px solid #52aea3;
+    border-radius: 50%;
+    background-color: #52aea3;
+    position: fixed;
+    right: 20px;
+    bottom: 25px;
+    max-height: none;
+  }
+  .list-book-container:first-child {
+    .title {
+      border-top: none;
+    }
+  }
+}

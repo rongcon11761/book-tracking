@@ -1,0 +1,33 @@
+.search-container {
+  margin-top: 20px;
+  min-height: 590px;
+  .header-search {
+    white-space: nowrap;
+  }
+  .search-listBook {
+    width: 100%;
+    padding: 10px 15px 10px 55px;
+    background-image: url(../../icons/search.svg);
+    background-repeat: no-repeat;
+    background-position: 5px 2px;
+    outline: none;
+    border: 1px solid #afafaf;
+    width: calc(100% - 210px);
+    font-size: 18px;
+    border-radius: 10px;
+    border-left: none;
+  }
+  .secondary-btn {
+    background-image: url(../../icons/arrow-back.svg);
+    background-repeat: no-repeat;
+    background-position: 8px 15px;
+    padding: 13px 15px 13px 36px;
+    border-radius: 10px;
+    border-right: none;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .list-book-container {
+    margin-top: 20px;
+  }
+}

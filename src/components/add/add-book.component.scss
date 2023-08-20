@@ -1,0 +1,30 @@
+.add-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  .add-form {
+    margin-top: 20px;
+    table {
+      margin: auto;
+    }
+  }
+  .add-input {
+    padding: 5px;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid;
+    width: 100%;
+  }
+  .row {
+    margin: 10px 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .add-button {
+    width: 150px;
+  }
+}
