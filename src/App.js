@@ -44,9 +44,9 @@ const App = () => {
           }
         });
       }
-      setListBook(listBook.map((item) => item));
+      setListBook((listBook) => listBook.map((item) => item));
     } catch (error) {
-      console.log(error);
+      console.log('Error:', error);
     }
   };
 
@@ -63,15 +63,13 @@ const App = () => {
         <Route
           exact
           path="/"
-          element={<HomeComponent listBook={listBook || []} updateListBook={updateListBook}></HomeComponent>}></Route>
+          element={<HomeComponent listBook={listBook} updateListBook={updateListBook}></HomeComponent>}></Route>
         <Route
           path="/create"
           element={<AddBookComponent listBook={listBook} onAddBook={createBook}></AddBookComponent>}></Route>
         <Route
           path="/search"
-          element={
-            <SearchComponent listBook={listBook || []} updateListBook={updateListBook}></SearchComponent>
-          }></Route>
+          element={<SearchComponent listBook={listBook} updateListBook={updateListBook}></SearchComponent>}></Route>
       </Routes>
       <FooterComponent></FooterComponent>
     </div>

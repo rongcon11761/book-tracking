@@ -10,15 +10,19 @@ const HomeComponent = ({ listBook, updateListBook }) => {
       <ListBookComponent
         handleClick={updateListBook}
         name="Currently Reading"
-        listBook={listBook.filter((item) => item.shelf === TYPES_OF_BOOK.CURRENTLY_READING) || []}></ListBookComponent>
+        listBook={
+          (listBook && listBook.filter((item) => item.shelf === TYPES_OF_BOOK.CURRENTLY_READING)) || []
+        }></ListBookComponent>
       <ListBookComponent
         handleClick={updateListBook}
         name="Want To Read"
-        listBook={listBook.filter((item) => item.shelf === TYPES_OF_BOOK.WANT_TO_READ) || []}></ListBookComponent>
+        listBook={
+          (listBook && listBook.filter((item) => item.shelf === TYPES_OF_BOOK.WANT_TO_READ)) || []
+        }></ListBookComponent>
       <ListBookComponent
         handleClick={updateListBook}
         name="Read"
-        listBook={listBook.filter((item) => item.shelf === TYPES_OF_BOOK.READ) || []}></ListBookComponent>
+        listBook={(listBook && listBook.filter((item) => item.shelf === TYPES_OF_BOOK.READ)) || []}></ListBookComponent>
       <Link to="/search" className="primary-btn search-button"></Link>
     </div>
   );
