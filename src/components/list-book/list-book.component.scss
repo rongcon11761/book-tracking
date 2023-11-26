@@ -30,6 +30,9 @@
     font-size: 17px;
     font-weight: 700;
   }
+  .book-authors {
+    color: #909286;
+  }
   .book-item {
     text-align: center;
     opacity: 1;
@@ -85,6 +88,12 @@
         opacity: 1;
         cursor: default;
       }
+    }
+  }
+  .error-message {
+    text-align: center;
+    span {
+      font-size: 20px;
     }
   }
 }

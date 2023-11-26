@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import '../search/search.component.scss';
 import PropTypes from 'prop-types';
 import ListBookComponent from '../list-book/list-book.component';
 import { Link } from 'react-router-dom';
 import * as BookAPI from '../../utils/BookAPI';
+import debounce from 'lodash.debounce';
 
 const SearchComponent = ({ listBook, updateListBook }) => {
+  console.log('before search = ', listBook);
   const [query, setQuery] = useState('');
   const [searchBook, setSearchedBook] = useState([]);
 
@@ -24,17 +26,26 @@ const SearchComponent = ({ listBook, updateListBook }) => {
     setQuery(query.trim());
   };
 
-  useEffect(() => {
-    if (query.length !== 0) {
+  const debouncedFilter = useCallback(
+    debounce((listBook, query) => {
       BookAPI.search(query)
         .then((searchedBooks) => {
-          if (!query || searchedBooks.error) {
+          if (searchedBooks.error) {
             return setSearchedBook([]);
           }
           setSearchedBook(setShelves(searchedBooks, listBook));
+          console.log('debouncedFilter = ', listBook);
         })
         .catch((err) => console.log('Search Error:', err));
-    } else setSearchedBook([]);
+    }, 500),
+    []
+  );
+
+  useEffect(() => {
+    if (!query) {
+      return setSearchedBook([]);
+    }
+    debouncedFilter(listBook, query);
   }, [listBook, query]);
 
   return (

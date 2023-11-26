@@ -5,7 +5,6 @@ import HeaderComponent from './components/header/header.component';
 import HomeComponent from './components/home/home.component';
 import { useEffect, useState } from 'react';
 import * as BookAPI from '../src/utils/BookAPI';
-import { TYPES_OF_BOOK } from './common/constants';
 import AddBookComponent from './components/add/add-book.component';
 import SearchComponent from './components/search/search.component';
 const App = () => {
@@ -22,29 +21,16 @@ const App = () => {
 
   /**
    * Change shelf of book and re-render list book
-   * @param {object} bookItem book's information
-   * @param {string} typeBook shelf of book
+   * @param {object} book book's information
+   * @param {string} shelf shelf of book
    */
-  const updateListBook = async (bookItem, typeBook) => {
+  const updateListBook = async (book, shelf) => {
     try {
-      const res = await BookAPI.update(bookItem, typeBook);
-      if (res) {
-        listBook.forEach((item) => {
-          const currentlyReading = res.currentlyReading.some((bookId) => bookId === item.id);
-          if (currentlyReading) {
-            item.shelf = TYPES_OF_BOOK.CURRENTLY_READING;
-          }
-          const wantToRead = res.wantToRead.some((bookId) => bookId === item.id);
-          if (wantToRead) {
-            item.shelf = TYPES_OF_BOOK.WANT_TO_READ;
-          }
-          const read = res.read.some((bookId) => bookId === item.id);
-          if (read) {
-            item.shelf = TYPES_OF_BOOK.READ;
-          }
-        });
-      }
-      setListBook((listBook) => listBook.map((item) => item));
+      book.shelf = shelf;
+      BookAPI.update(book, shelf).then(() => {
+        setListBook((listBook) => listBook.map((item) => (item.id === book.id ? book : item)));
+        console.log('update list book = ', listBook);
+      });
     } catch (error) {
       console.log('Error:', error);
     }
