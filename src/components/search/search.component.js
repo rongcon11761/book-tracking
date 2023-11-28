@@ -7,10 +7,8 @@ import * as BookAPI from '../../utils/BookAPI';
 import debounce from 'lodash.debounce';
 
 const SearchComponent = ({ listBook, updateListBook }) => {
-  console.log('before search = ', listBook);
   const [query, setQuery] = useState('');
   const [searchBook, setSearchedBook] = useState([]);
-
   const setShelves = (searchedBooks, currentListBook) => {
     return searchedBooks.map((book) => {
       for (let item of currentListBook) {
@@ -34,7 +32,6 @@ const SearchComponent = ({ listBook, updateListBook }) => {
             return setSearchedBook([]);
           }
           setSearchedBook(setShelves(searchedBooks, listBook));
-          console.log('debouncedFilter = ', listBook);
         })
         .catch((err) => console.log('Search Error:', err));
     }, 500),
@@ -45,7 +42,22 @@ const SearchComponent = ({ listBook, updateListBook }) => {
     if (!query) {
       return setSearchedBook([]);
     }
-    debouncedFilter(listBook, query);
+    if (!searchBook || searchBook.length === 0) {
+      debouncedFilter(listBook, query);
+    } else {
+      searchBook &&
+        searchBook.map((book) => {
+          for (let item of listBook) {
+            if (book.shelf !== '') {
+              if (item.id === book.id) {
+                console.log();
+              } else {
+                console.log(item);
+              }
+            }
+          }
+        });
+    }
   }, [listBook, query]);
 
   return (
