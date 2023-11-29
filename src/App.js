@@ -29,7 +29,6 @@ const App = () => {
       book.shelf = shelf;
       BookAPI.update(book, shelf).then(() => {
         setListBook((listBook) => listBook.map((item) => (item.id === book.id ? book : item)));
-        console.log('update list book = ', listBook);
       });
     } catch (error) {
       console.log('Error:', error);

@@ -21,9 +21,10 @@ const SearchComponent = ({ listBook, updateListBook }) => {
   };
 
   const updateQuery = (query) => {
-    setQuery(query.trim());
+    setQuery(query);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFilter = useCallback(
     debounce((listBook, query) => {
       BookAPI.search(query)
@@ -38,26 +39,22 @@ const SearchComponent = ({ listBook, updateListBook }) => {
     []
   );
 
+  const updateBookShelf = (listBook, searchBook) => {
+    searchBook &&
+      searchBook.forEach((book) => {
+        if (book.shelf !== '' && !listBook.find((item) => item.id === book.id)) {
+          listBook.push(book);
+        }
+      });
+  };
+
   useEffect(() => {
     if (!query) {
       return setSearchedBook([]);
     }
-    if (!searchBook || searchBook.length === 0) {
-      debouncedFilter(listBook, query);
-    } else {
-      searchBook &&
-        searchBook.map((book) => {
-          for (let item of listBook) {
-            if (book.shelf !== '') {
-              if (item.id === book.id) {
-                console.log();
-              } else {
-                console.log(item);
-              }
-            }
-          }
-        });
-    }
+    updateBookShelf(listBook, searchBook);
+    debouncedFilter(listBook, query);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listBook, query]);
 
   return (
